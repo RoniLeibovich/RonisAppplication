@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e8f5e9"
+    tools:context=".TakanonActivity3">
+
+    <!-- תוכן התקנון -->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#CEAFDAD6"
+        android:fontFamily="sans-serif-medium"
+        android:padding="12dp"
+        android:text="Takanon"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <TextView
+        android:id="@+id/takanon_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="תקנון למשחק: Guess the Number
+המשחק מבקש לנחש מספר אקראי בטווח שנבחר.
+יש לבחור טווח מתוך שלוש אפשרויות: 0-100, 101-200, או 201-300.
+לאחר בחירת הטווח, לחצו על הפק מספר אקראי כדי להתחיל.
+יש להכניס ניחוש בשדה הקלט ולנסות לנחש את המספר.
+אם הניחוש נכון, תראו הודעה של הצלחה עם מספר הניחושים.
+אם הניחוש גבוה מדי או נמוך מדי, תקבלו הודעה בהתאם.
+אין הגבלה לניחושים, אבל המטרה היא לנחש מהר.
+אם לא בחרתם טווח, תתבקשו לבחור אחד.
+אם לא הזנתם מספר תקני, תתבקשו להכניס ניחוש חוקי.
+לחצו על חזרה לדף הבית כדי לחזור לעמוד הראשי.
+"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="6sp"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- הוספת כפתור מאשר -->
+    <Button
+        android:id="@+id/agree_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="מאשר"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

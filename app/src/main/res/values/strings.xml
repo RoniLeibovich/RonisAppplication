@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Roni\'s first Appplication</string>
+    <string name="hellooooo_everybody">Hellooooo everybody !</string>
+    <string name="click_here">Click Here</string>
+    <string name="another_click_for_fun">another click for fun</string>
+    <string name="click_for_another_page">Click for another page</string>
+    <string name="change_color">change color:</string>
+    <string name="todo">TODO</string>
+    <string name="welcome_to_the_second_page">Welcome to the second page!</string>
+    <string name="go_to_guess_num_page">Go to guess num page</string>
+    <string name="return_to_home_page">Return to home page</string>
+    <string name="click_for_the_game_page">Click for the game page</string>
+    <string name="_0_100">0 - 100</string>
+    <string name="new_item">New Item</string>
+</resources>
