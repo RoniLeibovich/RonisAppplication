@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!--TODO-->
+    <!-- TODO -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RonisFirstAppplication"
         tools:targetApi="31">
+        <activity
+            android:name=".login"
+            android:exported="false" />
         <activity
             android:name=".TimerActivity"
             android:exported="false" />

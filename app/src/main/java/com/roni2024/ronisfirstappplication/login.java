@@ -1,113 +1,92 @@
 package com.roni2024.ronisfirstappplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.content.Intent;
+import android.content.SharedPreferences;
+
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.SeekBar;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-
-public class MainActivity extends AppCompatActivity {
-    Button b1, b2, bL, bCountTimer;
-    TextView tv1;
-    ConstraintLayout layout;
-
-    ImageView iv;
-    SeekBar sb;
+public class login extends AppCompatActivity {
+    private EditText etUsername, etPassword;
+    private Button btnSave;
+    private TextView tvSavedData;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_login);
 
+        // אתחול של ה-Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-        Toast.makeText(this, "main", Toast.LENGTH_SHORT).show();
+        // אתחול של השדות
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        btnSave = findViewById(R.id.btnSave);
+        tvSavedData = findViewById(R.id.tvSavedData);
 
-        initViews();
+        // אתחול של SharedPreferences
+        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
-        // Register for Context Menu (make sure to add to the ImageView or another view)
-        registerForContextMenu(iv); // This registers the ImageView to show the context menu when long-clicked
+        // הצגת נתונים ששמורים ב-SharedPreferences
+        displaySavedData();
+
+        // שמירת הנתונים ב-SharedPreferences כאשר לוחצים על כפתור שמירה
+        btnSave.setOnClickListener(view -> {
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(login.this, "נא למלא את כל השדות", Toast.LENGTH_SHORT).show();
+            } else {
+                // שמירה ב-SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", username); // שמירת שם המשתמש
+                editor.putString("password", password); // שמירת הסיסמה
+                editor.apply(); // שמירה
+
+                // הצגת הנתונים שמורים בעמוד
+                displaySavedData();
+
+                // הצגת הודעה למשתמש על שמירת הנתונים
+                Toast.makeText(login.this, "הנתונים נשמרו", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+    private void displaySavedData() {
+        // קבלת נתונים מ-SharedPreferences
+        String savedUsername = sharedPreferences.getString("username", "לא הוזן שם משתמש");
+        String savedPassword = sharedPreferences.getString("password", "לא הוזנה סיסמה");
 
-    private void initViews() {
-        tv1=findViewById(R.id.tv1);
-        // Finding buttons and setting onClickListeners
-        b1 = findViewById(R.id.btn1);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tv1.setText("Thank you for your click");
-                Log.d("Roni", "b1");
-            }
-        });
-
-        b2 = findViewById(R.id.btn2);
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tv1.setText("So Fun");
-                Log.d("Roni", "b2");
-            }
-        });
-
-        bL = findViewById(R.id.btnLinear);
-        bL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Transition to NoamActivity2
-                Intent intent = new Intent(MainActivity.this, NoamActivity2.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        // Finding ImageView and SeekBar, setting alpha change listener
-        iv = findViewById(R.id.iv);
-        sb = findViewById(R.id.sb);
-
-        // Default transparency value
-        sb.setProgress(100);
-
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                float alpha = (float) i / 100;
-                iv.setAlpha(alpha);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-        bCountTimer = findViewById(R.id.bCountTimer);
-        bCountTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TimerActivity.class);
-                startActivity(intent);
-            }
-        });
+        // הצגת הנתונים בתוך TextView
+        tvSavedData.setText("שם משתמש: " + savedUsername + "\nסיסמה: " + savedPassword);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
-
 
 
 }
