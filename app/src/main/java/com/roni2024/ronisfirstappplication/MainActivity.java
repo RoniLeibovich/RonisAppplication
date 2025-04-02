@@ -15,12 +15,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
-
 
 public class MainActivity extends AppCompatActivity {
     Button b1, b2, bL, bCountTimer;
@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "main", Toast.LENGTH_SHORT).show();
 
         initViews();
+
+        // הוספת כפתור הגדרות ליד ה-Menu
+
+
 
         // Register for Context Menu (make sure to add to the ImageView or another view)
         registerForContextMenu(iv); // This registers the ImageView to show the context menu when long-clicked
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -144,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 // יצירת Intent לאקטיביטי של קטגוריה 3
                 Intent intent3 = new Intent(this, login.class);
                 startActivity(intent3);
+            case R.id.settings:
+                // יצירת Intent לאקטיביטי של קטגוריה 3
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.main:
                 Intent intent4 = new Intent(this, MainActivity.class);
@@ -153,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     // יצירת תפריט Context Menu לתמונה
     @Override
@@ -173,8 +181,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
-
-
-
 }

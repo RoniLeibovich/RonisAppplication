@@ -20,5 +20,10 @@
         android:id="@+id/item3"
         android:title="login"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/settings"
+        android:title="settings"
+
+        />
 
 </menu>
